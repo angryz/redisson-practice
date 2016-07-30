@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/cache
+            http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <cache:annotation-driven/>
+
+    <bean name="mockService" class="angryz.practice.redisson.MockService"/>
+
+    <bean name="redissonClient" class="angryz.practice.redisson.RedissonClientFactoryBean"/>
+
+    <bean name="cacheManager" class="org.redisson.spring.cache.RedissonSpringCacheManager">
+        <property name="redisson" ref="redissonClient"/>
+        <property name="config">
+            <map>
+                <entry key="testCache">
+                    <bean class="org.redisson.spring.cache.CacheConfig">
+                        <property name="TTL" value="1800000"/> <!-- 30 minutes -->
+                        <property name="maxIdleTime" value="900000"/> <!-- 15 minutes -->
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+</beans>

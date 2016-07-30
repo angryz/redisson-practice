@@ -1,0 +1,22 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'idea'
+
+jar {
+    baseName = 'redisson-practice'
+    version = '0.1.0'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile 'org.redisson:redisson:2.2.22'
+    compile 'org.springframework:spring-context:4.3.2.RELEASE'
+    compile 'org.springframework:spring-context-support:4.3.2.RELEASE'
+}
